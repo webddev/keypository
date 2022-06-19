@@ -1,0 +1,55 @@
+baseURL: https://keypository.com
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: true
+disableKinds:
+- RSS
+- taxonomy
+- term
+enableRobotsTXT: true
+languages:
+  en:
+    contentDir: content/en
+    title: Keypository
+    weight: 1
+    params:
+      menu:
+        request: Request
+        advantages: Advantages
+        about: About
+        contacts: Contacts
+        privacyPolicy: Privacy Policy
+        rights: All rights reserved
+      requestForm:
+        title: Leave a request for connection
+        subtitle: We will contact you soon
+        name: Your name
+        phone: Your phone number
+        email: Your email
+        additionalMessage: By clicking on "Send" I agree with the
+        additionalLink: Privacy Policy.
+        button: Send
+  fr:
+    contentDir: content/fr
+    title: Keypository
+    weight: 2
+    params:
+      menu:
+        request: Demande
+        advantages: Avantages
+        about: About
+        contacts: Contacts
+        privacyPolicy: Privacy Policy
+        rights: All rights reserved
+      requestForm:
+        title: Laisser une demande de connexion
+        subtitle: Nous vous contacterons bientôt
+        name: Votre nom
+        phone: Votre numéro de téléphone
+        email: Votre e-mail
+        additionalMessage: Cliquant sur "Envoyer" je suis d'accord avec la
+        additionalLink: Politique de Respect de la Vie privée
+        button: Envoyer
+minify:
+  minifyOutput: true
+params:
+  yandexMetrika: 88177916

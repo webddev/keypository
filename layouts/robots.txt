@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /api/
+
+Sitemap: {{ site.BaseURL }}/sitemap.xml
+Host: {{ site.BaseURL }}

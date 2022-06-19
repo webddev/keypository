@@ -1,0 +1,12 @@
+<!--div class="col-8 col-sm-7 col-lg-4 another-variants-col"-->
+<div class="col-8 col-sm-7 col-lg-4 {{ .BaseCssClass }}-col">
+  <div class="{{ .BaseCssClass }}-content" style="background-color: #ffffff;">
+    {{ (resources.Get .Image).Content | safeHTML }}
+    <h3>{{ .Title }}</h3>
+    <ul>
+      {{- range .List -}}
+      <li><p>{{ . }}</p></li>
+      {{- end -}}
+    </ul>
+  </div>
+</div>

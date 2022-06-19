@@ -1,0 +1,54 @@
+name: Deploy
+on:
+  push:
+    branches:
+    - development
+jobs:
+  deploy-keypository-com:
+    name: Deploy keypository.com
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Build
+      run: docker run -a stdout -a stderr --rm -v "`pwd`:/src" klakegg/hugo:latest-ext --config keypository.com.yaml
+
+    - name: Test
+      run: find public/
+
+    - name: Publish
+      uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --follow-symlinks --delete
+      env:
+        AWS_S3_BUCKET: keypository.com
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'eu-north-1'
+        SOURCE_DIR: 'public'
+  deploy-keypository-ru:
+    name: Deploy keypository.ru
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Build
+      run: docker run -a stdout -a stderr --rm -v "`pwd`:/src" klakegg/hugo:latest-ext --config keypository.ru.yaml
+
+    - name: Test
+      run: find public/
+
+    - name: Publish
+      run: |
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        ssh-keyscan -H "$HOST_IP" > ~/.ssh/known_hosts
+        rsync -rav --delete public/ deploy@${HOST_IP}:/var/www/keypository.ru
+      env:
+        HOST_IP: 51.250.25.192

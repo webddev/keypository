@@ -1,0 +1,57 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid container">
+      <a class="navbar-brand" href="{{ "/" | relLangURL }}#main">
+        <img src="/img/logo-black.svg" alt="Logo" />
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Open menu"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              aria-current="page"
+              href="{{ "/" | relLangURL }}#advantages"
+              >{{ .Param "menu.advantages" }}</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ "/" | relLangURL }}#about">{{ .Param "menu.about" }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ "/" | relLangURL }}#contacts">{{ .Param "menu.contacts" }}</a>
+          </li>
+          <li class="nav-item">
+            {{ if eq .Site.Language.Lang "ru" }}
+            <a href="https://keypository.com/en/" class="nav-link change-lang">EN</a>
+            {{ else if eq .Site.Language.Lang "en" }}
+            <a href="/fr/" class="nav-link change-lang">FR</a>
+            {{ else }}
+            <a href="/en/" class="nav-link change-lang">EN</a>
+            {{ end }}
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link connect-link"
+              data-src="#request"
+            >
+              {{ .Param "menu.request" }}
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

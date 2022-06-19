@@ -1,0 +1,32 @@
+baseURL: https://keypository.ru
+defaultContentLanguage: ru
+disableKinds:
+- RSS
+- taxonomy
+- term
+enableRobotsTXT: true
+languages:
+  ru:
+    contentDir: content/ru
+    title: Keypository
+    weight: 0
+minify:
+  minifyOutput: true
+params:
+  menu:
+    request: Подключиться
+    advantages: Преимущества
+    about: О нас
+    contacts: Контакты
+    privacyPolicy: Политика конфиденциальности
+    rights: Все права защищены
+  requestForm:
+    title: Оставьте заявку на подключение
+    subtitle: Мы свяжемся с вами в ближайшее время
+    name: Ваше имя
+    phone: Ваш телефон
+    email: Ваш e-mail
+    additionalMessage: Нажимая кнопку "Отправить" вы соглашаетесь с
+    additionalLink: Политикой конфиденциальности.
+    button: Отправить
+  yandexMetrika: 87713096

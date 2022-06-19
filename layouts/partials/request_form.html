@@ -1,0 +1,49 @@
+<!-- popup -->
+<div class="request" id="request">
+  <div class="request-body">
+    <div class="request-content">
+      <form action="/api/request" id="form2" method="post">
+        <h2>{{ .Param "requestForm.title" }}</h2>
+        <p>{{ .Param "requestForm.subtitle" }}</p>
+        <div class="inputs-request-row">
+          <input
+            type="text"
+            id="name1"
+            name="Name"
+            placeholder="{{ .Param "requestForm.name" }}"
+            required
+          />
+          <input
+            type="tel"
+            id="phone1"
+            name="Phone"
+            placeholder="{{ .Param "requestForm.phone" }}"
+            required
+          />
+          <input
+            type="email"
+            id="email1"
+            name="Email"
+            placeholder="{{ .Param "requestForm.email" }}"
+          />
+          <input
+            type="hidden"
+            id="lang1"
+            value="{{ .Site.Language.Lang }}"
+          />
+          <button type="submit" class="form-button">
+            {{ .Param "requestForm.button" }}
+          </button>
+          <p>
+            {{ .Param "requestForm.additionalMessage" }}
+            <a href="{{ "/privacypolicy/" | relLangURL }}">
+              {{ .Param "requestForm.additionalLink" }}
+            </a>
+          </p>
+        </div>
+      </form>
+      <a class="request-close"></a>
+    </div>
+  </div>
+</div>
+<!-- popup -->

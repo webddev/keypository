@@ -1,0 +1,230 @@
+{{ define "main" }}
+<main>
+  <!-- Main section -->
+  <section class="main" id="main">
+    <div class="main-wrapper">
+      <div class="container">
+        <div class="row main-block-row">
+          <div
+            class="offset-1 col-10 offset-sm-0 col-md-9 offset-lg-0 col-lg-6 main-content"
+          >
+            <h1>
+              <strong><span class="text-white">Keypository</span></strong> – {{
+              .Param "sections.main.slogan" }}
+            </h1>
+            <p>{{ .Param "sections.main.mission" }}</p>
+            <button
+              class="main-button"
+            >
+              {{ .Param "sections.main.button" }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- "How it works?" section -->
+  <section class="operating-principle">
+    <div class="operating-wrapper">
+      <div class="container operating-container">
+        <h2 class="basic-title">
+          {{ .Param "sections.operatingPrinciple.title" }}
+        </h2>
+        <div class="row operating-row">
+          <div
+            class="col-8 col-sm-6 col-md-5 col-xl-3 operating-col first-operating-col"
+          >
+            <div class="number">1</div>
+            <div class="card-content">
+              {{ (resources.Get "operating-principle-card-1.svg").Content |
+              safeHTML }}
+              <p>{{ .Param "sections.operatingPrinciple.card1" }}</p>
+            </div>
+          </div>
+          <div
+            class="col-8 col-sm-6 col-md-5 col-xl-3 operating-col second-operating-col"
+          >
+            <div class="number">2</div>
+            <div class="card-content">
+              {{ (resources.Get "operating-principle-card-2.svg").Content |
+              safeHTML }}
+              <p>{{ .Param "sections.operatingPrinciple.card2" }}</p>
+            </div>
+          </div>
+          <div
+            class="col-8 col-sm-6 col-md-5 col-xl-3 operating-col third-operating-col"
+          >
+            <div class="number">3</div>
+            <div class="card-content">
+              {{ (resources.Get "operating-principle-card-3.svg").Content |
+              safeHTML }}
+              <p>{{ .Param "sections.operatingPrinciple.card3" }}</p>
+            </div>
+          </div>
+          <div
+            class="col-8 col-sm-6 col-md-5 col-xl-3 operating-col last-operating-col"
+          >
+            <div class="number">4</div>
+            <div class="card-content">
+              {{ (resources.Get "operating-principle-card-4.svg").Content |
+              safeHTML }}
+              <p>{{ .Param "sections.operatingPrinciple.card4" }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- "Other variants" section -->
+  <section class="another-variants">
+    <div class="container">
+      <h2 class="basic-title">
+        Есть много работающих, но <br />
+        <span class="green"> не слишком удобных</span> вариантов заселения:
+      </h2>
+      <div class="row another-variants-row">
+        {{ range (.Param "sections.anotherVariants.cards") }} {{ partial "card"
+        (merge . (dict "BaseCssClass" "another-variants")) }} {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <!-- "Advantages" section -->
+  <section class="another-variants" id="advantages" style="background-color: #afcb64">
+    <div class="container">
+      <h2 class="basic-title">{{ .Param "sections.advantages.title" }}</h2>
+      <div class="row another-variants-row">
+        {{ range (.Param "sections.advantages.cards") }} {{ partial "card"
+        (merge . (dict "BaseCssClass" "another-variants")) }} {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <!-- "About" section -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="row about-row">
+        <div class="col-12 col-lg-6">
+          {{ .Param "sections.about.text" | markdownify }}
+        </div>
+        <div class="col-7 col-md-6 col-lg-4 our-mission-col-2">
+          <div class="our-mission-text">
+            <p>{{ .Param "sections.about.missionTitle" }}</p>
+            <strong>{{ .Param "sections.about.missionText" }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- "Sign-up" section -->
+  <section class="connecting">
+    <div class="container">
+      <div class="bg-connecting">
+        <div class="row">
+          <div class="col-sm-8 col-lg-5">
+            <h2 class="basic-title">
+              {{ .Param "sections.connecting.title" }}
+            </h2>
+            {{ .Param "sections.connecting.text" | markdownify }}
+          </div>
+          <div class="col-lg-5 offset-lg-2">
+            <form action="/api/request" id="form1" method="post">
+              <span>{{ .Param "sections.connecting.formTitle" }}</span>
+              <input type="text" id="name" name="Name" placeholder="{{ .Param
+              "sections.connecting.formName" }}" required /> 
+              <input type="tel" id="phone"
+              name="Phone" placeholder="{{ .Param
+              "sections.connecting.formPhone" }}" required /> 
+              <input
+              type="email" id="email" name="Email" placeholder="{{ .Param
+              "sections.connecting.formEmail" }}" /> <br />
+              <input
+                type="checkbox"
+                name="Agreement"
+                id="agreement"
+                class="custom-checkbox"
+                required
+              />
+              <label for="#agreement">
+                Я согласен(на) с
+                <a href="{{ "/privacypolicy/" | relLangURL }}" target="_blank">Политикой конфиденциальности</a>
+              </label>
+              <button type="submit" form="form1" class="form-button">
+                {{ .Param "sections.connecting.formButton" }}
+              </button>
+              <br />
+            </form>
+          </div>
+        </div>
+        <!-- Всплывающее окно -->
+        <div class="popup" id="popup">
+          <div class="popup-body">
+            <div class="popup-content">
+          <svg width="50" height="50" fill="#62C584">
+            <path
+              d="M25.1 49.28A24.64 24.64 0 0 1 .5 24.68 24.64 24.64 0 0 1 25.1.07a24.64 24.64 0 0 1 24.6 24.6 24.64 24.64 0 0 1-24.6 24.61zm0-47.45A22.87 22.87 0 0 0 2.26 24.68 22.87 22.87 0 0 0 25.1 47.52a22.87 22.87 0 0 0 22.84-22.84A22.87 22.87 0 0 0 25.1 1.83z"
+            ></path>
+            <path
+              d="M22.84 30.53l-4.44-4.45a.88.88 0 1 1 1.24-1.24l3.2 3.2 8.89-8.9a.88.88 0 1 1 1.25 1.26L22.84 30.53z"
+            ></path>
+          </svg>
+          <p>{{ .Param "sections.connecting.formMessage" }}</p>
+          
+          <a class="popup-close"></a>
+        </div>
+        </div>
+        </div>
+        <!-- Всплывающее окно -->
+        <div class="popup-error">
+          <div class="popup-error-body">
+            <div class="popup-error-content">
+              <img src="../img/icon-error.png" class="img-fluid" width="50">
+              <p>Ошибка отправки данных</p>
+              <a class="popup-error-close"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Блок "Контакты" -->
+  <section class="contacts" id="contacts">
+    <div class="container">
+      <h2 class="basic-title">
+        {{ .Param "sections.contacts.title0" }}
+        <span class="green">{{ .Param "sections.contacts.title1" }}</span>
+      </h2>
+      <div class="row contacts-row">
+        <div class="col-12 col-md-6 col-lg-4 contacts-col">
+          <div class="contacts-content">
+            {{ (resources.Get "phone.svg").Content | safeHTML }}
+            <p><a href="tel:+74992135359">+7 (499) 213 53 59</a></p>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 contacts-col">
+          <div class="contacts-content">
+            {{ (resources.Get "email.svg").Content | safeHTML }}
+            <p>
+              <a href="mailto:info@keypository.com">info@keypository.com</a>
+            </p>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 contacts-col">
+          <div class="contacts-content">
+            {{ (resources.Get "location.svg").Content | safeHTML }}
+            <p>
+              119180, г. Москва, ул. Большая Полянка, д. 23с1, этаж 3, к. 2-8
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{ partial "request_form.html" . }}
+</main>
+{{ end }}
